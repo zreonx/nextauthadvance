@@ -10,6 +10,7 @@ import {
 } from "@nextui-org/navbar";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
+import SigninButton from "./SigninButton";
 
 export default function AppBar() {
   return (
@@ -22,13 +23,8 @@ export default function AppBar() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end'>
-        {/* <NavbarItem className='hidden lg:flex'>
-          <Link href='#'>Login</Link>
-        </NavbarItem> */}
-        <NavbarItem>
-          <Button as={Link} color='primary' href='/signup' variant='flat'>
-            Sign Up
-          </Button>
+        <NavbarItem className='lg:flex'>
+          <SigninButton />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
