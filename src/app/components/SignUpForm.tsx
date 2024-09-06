@@ -61,7 +61,7 @@ export default function SignUpForm() {
     handleSubmit,
     reset,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
   } = useForm<InputType>({
     resolver: zodResolver(FormSchema),
@@ -187,8 +187,14 @@ export default function SignUpForm() {
       )}
 
       <div className='flex col-span-2'>
-        <Button className='w-1/3' color='primary' type='submit'>
-          Submit
+        <Button
+          className='w-1/3'
+          color='primary'
+          type='submit'
+          disabled={isSubmitting}
+          isLoading={isSubmitting}
+        >
+          {isSubmitting ? "Please wait..." : "Register"}
         </Button>
       </div>
     </form>

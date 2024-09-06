@@ -13,11 +13,11 @@ export default function PasswordStrength({
   message,
 }: PasswordStrengthProps) {
   return (
-    <div className='col-span-2 '>
+    <div className='col-span-2 w-[68%]'>
       <div className={cn("flex gap-2", {})}>
         {Array.from({ length: passStrength + 1 }).map((i, index) => (
           <div
-            className={cn("h-2 w-32 rounded-md", {
+            className={cn("h-2 w-[25%] rounded-md", {
               "bg-red-500": passStrength === 0,
               "bg-orange-500": passStrength === 1,
               "bg-yellow-500 ": passStrength === 2,
