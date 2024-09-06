@@ -16,9 +16,7 @@ interface SignInFormProps {
 
 const FormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
-  password: z.string({
-    required_error: "Please enter your password",
-  }),
+  password: z.string().min(1, "Password is required"),
 });
 
 type InputType = z.infer<typeof FormSchema>;
@@ -48,6 +46,8 @@ export default function SignInForm(props: SignInFormProps) {
     router.push(props.callbackUrl ? props.callbackUrl : "/");
     // router.refresh();
   };
+
+  console.log(errors);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2'>
       <div className=''>
