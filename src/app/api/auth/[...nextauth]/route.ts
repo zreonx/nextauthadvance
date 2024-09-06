@@ -6,6 +6,9 @@ import NextAuth from "next-auth/next";
 import { User } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
+  pages: {
+    signIn: "/signin",
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",

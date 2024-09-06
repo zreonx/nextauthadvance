@@ -91,7 +91,7 @@ export default function SignUpForm() {
   return (
     <form
       onSubmit={handleSubmit(saveUser)}
-      className='grid grid-cols-2 gap-3 p-2 place-self-stretch shadow border rounded-md'
+      className='grid grid-cols-2 gap-3 place-self-stretch'
     >
       <Input
         {...register("firstName")}
@@ -157,6 +157,15 @@ export default function SignUpForm() {
         label='Confirm Password'
         startContent={<KeyIcon className='w-4' />}
       />
+      <div className='flex justify-between col-span-2'>
+        <p className='text-center'>Already have an account?</p>
+        <Link
+          className='text-white hover:underline transition-all'
+          href='/signin'
+        >
+          Sign In
+        </Link>
+      </div>
       <Controller
         control={control}
         name='accepted'
@@ -170,13 +179,14 @@ export default function SignUpForm() {
           </Checkbox>
         )}
       />
+
       {!!errors.accepted && (
         <p className='text-red-500 font-light text-xs'>
           {errors.accepted.message}
         </p>
       )}
 
-      <div className='flex justify-center col-span-2'>
+      <div className='flex col-span-2'>
         <Button className='w-1/3' color='primary' type='submit'>
           Submit
         </Button>
