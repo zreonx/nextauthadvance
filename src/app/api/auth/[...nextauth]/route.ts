@@ -4,6 +4,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import * as bcrypt from "bcrypt";
 import NextAuth from "next-auth/next";
 import { User } from "@prisma/client";
+import { compileActivationTemplate, sendMail } from "@/lib/mail";
+import { signJwt } from "@/lib/jwt";
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -42,6 +44,28 @@ export const authOptions: AuthOptions = {
 
         if (!isPasswordCorrect)
           throw new Error("Username or password is not correct");
+
+        if (!user.emailVerified) {
+          const jwtUserId = signJwt({
+            id: user.id,
+          });
+
+          const activation_url = `${process.env.NEXTAUTH_URL}/activation/${jwtUserId}`;
+          const body = compileActivationTemplate(
+            user.firstName,
+            activation_url
+          );
+
+          await sendMail({
+            to: user.email,
+            subject: "Activate Your Account",
+            body,
+          });
+
+          throw new Error(
+            "We've send you an activation email. Please verify your email first"
+          );
+        }
 
         const { password, ...userWithoutPassword } = user;
 

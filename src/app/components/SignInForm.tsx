@@ -81,9 +81,19 @@ export default function SignInForm(props: SignInFormProps) {
         />
 
         <div className='flex items-center justify-between gap-2 mb-4'>
-          <Link href={"/auth/forgot-password"}>Forgot your password?</Link>
+          <Link
+            className=' hover:underline hover:underline-offset-2'
+            href={"/forgot-password"}
+          >
+            Forgot your password?
+          </Link>
 
-          <Link href='/signup'>Sign Up</Link>
+          <Link
+            className=' hover:underline hover:underline-offset-2'
+            href='/signup'
+          >
+            Sign Up
+          </Link>
         </div>
         <Button
           color='primary'
