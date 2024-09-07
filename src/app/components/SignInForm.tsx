@@ -44,6 +44,7 @@ export default function SignInForm(props: SignInFormProps) {
     }
 
     router.push(props.callbackUrl ? props.callbackUrl : "/");
+    router.push("/");
     // router.refresh();
   };
 

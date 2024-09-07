@@ -1,6 +1,6 @@
 "use client";
-import { Button } from "@nextui-org/react";
-import { signIn, useSession } from "next-auth/react";
+import { button, Button, ButtonGroup } from "@nextui-org/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
@@ -10,17 +10,27 @@ export default function SigninButton() {
     <div className='flex items-center gap-2'>
       {session && session.user ? (
         <>
-          <p>{`${session.user.firstName} ${session.user.lastName}`}</p>{" "}
-          <Link
+          <Link href={"/profile"}>Profile</Link>
+
+          <Button
+            variant='flat'
+            type='button'
             className='text-sky-500 hover:text-sky-600 transition-colors'
-            href={"/api/auth/signout"}
+            onClick={() => {
+              signOut({
+                redirect: true,
+                callbackUrl: `${window.location.origin}/signin`,
+              });
+            }}
           >
             Sign Out
-          </Link>
+          </Button>
         </>
       ) : (
         <>
-          <Button onClick={() => signIn()}>Sign In</Button>
+          <Button as={Link} href={"/api/auth/signin"}>
+            Sign In
+          </Button>
           <Button as={Link} href={"/signup"}>
             Sign Up
           </Button>
